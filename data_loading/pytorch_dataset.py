@@ -18,12 +18,10 @@ if TYPE_CHECKING:
 
     Targets = npt.NDArray[np.int64]
 
-def sample_fun():
-    print(running)
+
 
 class GeoLifeCLEF2022Dataset(Dataset):
     """Pytorch dataset handler for GeoLifeCLEF 2022 dataset.
-
     Parameters
     ----------
     root : string or pathlib.Path
@@ -151,8 +149,8 @@ class GeoLifeCLEF2022Dataset(Dataset):
             observation_id, self.root, data=self.patch_data
         )
 
-        # patches = np.array(patches)
-        # patches = torch.Tensor(patches)
+
+        patches = torch.Tensor(patches)
 
         # FIXME: add back landcover one hot encoding?
         # lc = patches[3]
@@ -164,8 +162,10 @@ class GeoLifeCLEF2022Dataset(Dataset):
         # Extracting patch from rasters
         if self.patch_extractor is not None:
             environmental_patches = self.patch_extractor[(latitude, longitude)]
-            # print(type(environmental_patches))
-            patches = patches + environmental_patches
+            # patches = patches + torch.Tensor(environmental_patches)
+            patches = torch.cat([patches, torch.Tensor(environmental_patches)],axis=0)
+
+        # patches = torch.tensor(patches)
 
         # Concatenate all patches into a single tensor
         if len(patches) == 1:
@@ -183,4 +183,3 @@ class GeoLifeCLEF2022Dataset(Dataset):
             return patches, target
         else:
             return patches
-
