@@ -7,6 +7,7 @@ import torch.nn.functional as F
 import pretrainedmodels
 import torch
 
+#sample model
 device = device('cuda' if cuda.is_available() else 'cpu')
 N_classes = 17036
 class ResNetGeolife(ResNet):
