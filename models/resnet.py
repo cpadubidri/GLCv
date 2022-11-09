@@ -14,5 +14,5 @@ class ResNetGeolife(ResNet):
     def __init__(self):
         super().__init__(BasicBlock, [3, 4, 6, 3], num_classes=N_classes)
 
-        self.conv1 = nn.Conv2d(21, 64, kernel_size=7, stride=1, padding=3, bias=False)
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=1, padding=3, bias=False)
 

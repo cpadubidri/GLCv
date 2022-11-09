@@ -149,7 +149,6 @@ class GeoLifeCLEF2022Dataset(Dataset):
             observation_id, self.root, data=self.patch_data
         )
 
-
         patches = torch.Tensor(np.array(patches))
 
         # FIXME: add back landcover one hot encoding?
